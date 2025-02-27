@@ -50,10 +50,10 @@ export default function SEO({
           description: description,
           address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Rua das Tendas, 123',
-            addressLocality: 'Cidade',
-            addressRegion: 'Estado',
-            postalCode: '00000-000',
+            streetAddress: 'Rua Nelson dos Santos Antônio, 31',
+            addressLocality: 'Itu',
+            addressRegion: 'SP',
+            postalCode: '13309-773',
             addressCountry: 'BR'
           },
           geo: {
@@ -62,7 +62,7 @@ export default function SEO({
             longitude: '-46.633308'
           },
           url: siteUrl,
-          telephone: '+55 11 1234-5678',
+          telephone: '+55 11 2428-9800',
           priceRange: '$$'
         })}
       </script>

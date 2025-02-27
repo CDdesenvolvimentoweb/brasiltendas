@@ -5,7 +5,7 @@ export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/5511123456789', '_blank');
+    window.open('https://wa.me/5511988120388', '_blank');
   };
 
   return (

@@ -48,14 +48,14 @@ const featuredProducts = [
     image: tenda4,
   },
   {
-    name: 'Tenda Galpão',
-    description: 'Perfeita para grandes eventos e armazenamento temporário.',
+    name: 'Tenda Cristal',
+    description: 'Perfeita para eventos noturnos.',
     image: tenda5,
   },
   {
-    name: 'Tenda Chapéu de Bruxa',
-    description: 'Design clássico e versátil para diversos tipos de eventos.',
-    image: tenda6,
+    name: 'Tendas Modulares',
+    description: 'Estrutura moderna e versátil, ideal para grandes coberturas.',
+    image: tenda2,
   },
 ];
 
@@ -157,7 +157,7 @@ export default function Home() {
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-contain bg-white p-2"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
@@ -166,6 +166,40 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            animate={servicesInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold mb-4">Conheça nosso serviço</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Assista ao nosso vídeo institucional e descubra como podemos tornar seu evento ainda mais especial.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial="hidden"
+            animate={servicesInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            className="aspect-video w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg"
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/xqvcLz3h0Vc"
+              title="Vídeo Institucional Brasil Tendas"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -226,7 +260,7 @@ export default function Home() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-contain bg-white p-2"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{product.name}</h3>

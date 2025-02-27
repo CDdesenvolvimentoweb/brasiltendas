@@ -1,71 +1,83 @@
 import { 
-  BrowserRouter as Router, 
-  Routes, 
-  Route,
-  createRoutesFromElements,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider
 } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import LoadingSpinner from './components/LoadingSpinner';
-import MainLayout from './layouts/MainLayout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Products from './pages/Products';
-import Gallery from './pages/Gallery';
-import Testimonials from './pages/Testimonials';
-import Contact from './pages/Contact';
 
-// Lazy load components
-const MainLayoutLazy = lazy(() => import('./layouts/MainLayout'));
-const HomeLazy = lazy(() => import('./pages/Home'));
-const AboutLazy = lazy(() => import('./pages/About'));
-const ProductsLazy = lazy(() => import('./pages/Products'));
-const GalleryLazy = lazy(() => import('./pages/Gallery'));
-const TestimonialsLazy = lazy(() => import('./pages/Testimonials'));
-const ContactLazy = lazy(() => import('./pages/Contact'));
+// Configuração de lazy loading otimizada
+const lazyLoad = (importFn: () => Promise<any>) => {
+  return lazy(() => {
+    return Promise.all([
+      importFn(),
+      new Promise(resolve => setTimeout(resolve, 300)) // Mínimo de tempo para evitar flash
+    ]).then(([moduleExports]) => moduleExports);
+  });
+};
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={
-      <Suspense fallback={<LoadingSpinner />}>
-        <MainLayoutLazy />
-      </Suspense>
-    }>
-      <Route index element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <HomeLazy />
-        </Suspense>
-      } />
-      <Route path="sobre" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <AboutLazy />
-        </Suspense>
-      } />
-      <Route path="produtos" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <ProductsLazy />
-        </Suspense>
-      } />
-      <Route path="galeria" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <GalleryLazy />
-        </Suspense>
-      } />
-      <Route path="depoimentos" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <TestimonialsLazy />
-        </Suspense>
-      } />
-      <Route path="contato" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <ContactLazy />
-        </Suspense>
-      } />
-    </Route>
-  )
+// Lazy load components com prefetch
+const MainLayout = lazyLoad(() => import('./layouts/MainLayout'));
+const Home = lazyLoad(() => import('./pages/Home'));
+const About = lazyLoad(() => import('./pages/About'));
+const Products = lazyLoad(() => import('./pages/Products'));
+const Gallery = lazyLoad(() => import('./pages/Gallery'));
+const Testimonials = lazyLoad(() => import('./pages/Testimonials'));
+const Contact = lazyLoad(() => import('./pages/Contact'));
+
+// Configuração do Suspense com fallback otimizado
+const withSuspense = (Component: React.ComponentType) => (
+  <Suspense fallback={<LoadingSpinner />}>
+    <Component />
+  </Suspense>
 );
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: withSuspense(MainLayout),
+    children: [
+      {
+        index: true,
+        element: withSuspense(Home),
+      },
+      {
+        path: "sobre",
+        element: withSuspense(About),
+      },
+      {
+        path: "produtos",
+        element: withSuspense(Products),
+      },
+      {
+        path: "galeria",
+        element: withSuspense(Gallery),
+      },
+      {
+        path: "depoimentos",
+        element: withSuspense(Testimonials),
+      },
+      {
+        path: "contato",
+        element: withSuspense(Contact),
+      },
+    ],
+  },
+]);
+
+// Prefetch das rotas mais comuns
+const prefetchRoutes = () => {
+  const routes = [About, Products, Gallery];
+  routes.forEach(route => {
+    const prefetchComponent = route as any;
+    if (prefetchComponent.preload) {
+      prefetchComponent.preload();
+    }
+  });
+};
+
+// Executa o prefetch após o carregamento inicial
+setTimeout(prefetchRoutes, 1000);
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedSection from '../components/AnimatedSection';
 import tenda1 from '../assets/images/tenda1.jpeg';
 import tenda2 from '../assets/images/tenda2.jpeg';
 import tenda3 from '../assets/images/tenda3.jpeg';
@@ -39,9 +39,9 @@ const products = [
   },
   {
     id: 2,
-    name: 'Tenda Galpão',
-    description: 'Perfeita para grandes eventos e armazenamento temporário.',
-    image: tenda8,
+    name: 'Tenda Cristal',
+    description: 'Perfeita para eventos a noite.',
+    image: tenda5,
     sizes: ['10x20m', '15x30m', '20x40m', '25x50m'],
     features: [
       'Estrutura modular',
@@ -55,26 +55,6 @@ const products = [
       'Armazenamento',
       'Centros logísticos',
       'Shows e espetáculos',
-    ],
-  },
-  {
-    id: 3,
-    name: 'Tenda Chapéu de Bruxa',
-    description: 'Design clássico e versátil para diversos tipos de eventos.',
-    image: tenda3,
-    sizes: ['3x3m', '4x4m', '5x5m', '6x6m'],
-    features: [
-      'Design tradicional',
-      'Excelente ventilação',
-      'Lona anti-chama',
-      'Montagem rápida',
-      'Versatilidade de uso',
-    ],
-    applications: [
-      'Eventos sociais',
-      'Áreas de alimentação',
-      'Praças de alimentação',
-      'Pequenos eventos',
     ],
   },
   {
@@ -141,11 +121,6 @@ const products = [
 
 export default function Products() {
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0,
-    rootMargin: '0px 0px -10% 0px'
-  });
 
   return (
     <div>
@@ -159,13 +134,8 @@ export default function Products() {
           />
           <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="relative container">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            className="max-w-2xl"
-          >
+        <AnimatedSection className="relative container">
+          <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Nossos Produtos
             </h1>
@@ -173,71 +143,53 @@ export default function Products() {
               Conheça nossa linha completa de tendas profissionais para
               todos os tipos de eventos e necessidades.
             </p>
-          </motion.div>
-        </div>
+          </div>
+        </AnimatedSection>
       </section>
 
       {/* Tamanhos Section */}
-      <section className="py-20 bg-gray-50" ref={ref}>
+      <section className="py-20 bg-gray-50">
         <div className="container">
-          <motion.div
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="text-center mb-16"
-          >
+          <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Tamanhos Disponíveis</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Oferecemos uma ampla variedade de tamanhos para atender todas as suas necessidades.
               Confira nossa tabela de medidas padrão.
             </p>
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="rounded-lg overflow-hidden shadow-lg"
-          >
+          </AnimatedSection>
+          <AnimatedSection delay={0.2} className="rounded-lg overflow-hidden shadow-lg">
             <img
               src={tamanhos}
               alt="Tamanhos disponíveis de tendas"
               className="w-full h-auto"
             />
-          </motion.div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Products Catalog */}
-      <section className="py-20" ref={ref}>
+      <section className="py-20">
         <div className="container">
-          <motion.div
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="text-center mb-16"
-          >
+          <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Catálogo de Tendas</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Explore nossa variedade de tendas profissionais, desenvolvidas com
               tecnologia avançada e materiais de alta qualidade.
             </p>
-          </motion.div>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {products.map((product, index) => (
-              <motion.div
+              <AnimatedSection
                 key={product.id}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                variants={fadeIn}
-                transition={{ delay: index * 0.2 }}
+                delay={index * 0.1}
                 className="bg-white rounded-lg shadow-lg overflow-hidden group"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -309,20 +261,15 @@ export default function Products() {
                     </motion.div>
                   )}
                 </div>
-              </motion.div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary-500 text-white" ref={ref}>
-        <motion.div
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={fadeIn}
-          className="container text-center"
-        >
+      <section className="py-20 bg-primary-500 text-white">
+        <AnimatedSection className="container text-center">
           <h2 className="text-3xl font-bold mb-8">
             Encontrou o Produto Ideal?
           </h2>
@@ -336,7 +283,7 @@ export default function Products() {
           >
             Solicitar Orçamento
           </a>
-        </motion.div>
+        </AnimatedSection>
       </section>
     </div>
   );
