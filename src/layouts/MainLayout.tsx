@@ -8,6 +8,9 @@ import logoPreto from '../assets/images/logo-10-anos-preto.png';
 import ScrollToTop from '../components/ScrollToTop';
 import SEO from '../components/SEO';
 import ChatWidget from '../components/ChatWidget';
+import InstallPWA from '../components/InstallPWA';
+import UpdateNotification from '../components/UpdateNotification';
+import OfflineDetector from '../components/OfflineDetector';
 
 const navigation = [
   { name: 'Início', href: '/' },
@@ -56,6 +59,9 @@ export default function MainLayout() {
   return (
     <div className="flex flex-col min-h-screen scrollbar-premium">
       <SEO />
+      <InstallPWA />
+      <UpdateNotification />
+      <OfflineDetector />
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-primary-500"

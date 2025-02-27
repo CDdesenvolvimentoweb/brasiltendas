@@ -14,6 +14,30 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 - [React Router DOM](https://reactrouter.com/)
 - [React Hook Form](https://react-hook-form.com/)
 - [Headless UI](https://headlessui.dev/)
+- [PWA (Progressive Web App)](https://web.dev/progressive-web-apps/)
+
+## 📱 Funcionalidades PWA
+
+Este projeto agora inclui suporte a Progressive Web App (PWA), permitindo:
+
+- Instalação como aplicativo em dispositivos móveis e desktop
+- Funcionalidade offline parcial
+- Cache de recursos para carregamento mais rápido
+- Notificações de atualização de versão
+
+### Testando a funcionalidade PWA
+
+Para testar as funcionalidades PWA:
+
+1. Execute `npm run build` para gerar o build de produção
+2. Sirva o build usando um servidor HTTP, por exemplo: `npm run preview`
+3. Acesse a aplicação em um navegador compatível com PWA (Chrome, Edge, Safari, etc.)
+4. O navegador deve mostrar a opção de instalação na barra de endereços ou no menu
+5. Em dispositivos móveis, você verá um banner sugerindo a instalação
+
+### Ícones PWA
+
+Os ícones PWA devem ser adicionados em `public/icons/`. Veja o arquivo `public/icons/README.md` para mais informações.
 
 ## 💻 Instalação
 

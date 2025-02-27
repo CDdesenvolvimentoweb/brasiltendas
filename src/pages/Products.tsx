@@ -2,13 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from '../components/AnimatedSection';
 import tenda1 from '../assets/images/tenda1.jpeg';
-import tenda2 from '../assets/images/tenda2.jpeg';
-import tenda3 from '../assets/images/tenda3.jpeg';
-import tenda4 from '../assets/images/tenda4.jpeg';
 import tenda5 from '../assets/images/tenda5.jpeg';
 import tenda6 from '../assets/images/tenda6.jpeg';
 import tenda7 from '../assets/images/tenda7.jpeg';
-import tenda8 from '../assets/images/tenda8.jpeg';
 import tamanhos from '../assets/images/tamanhos.jpeg';
 
 const fadeIn = {
@@ -42,7 +38,7 @@ const products = [
     name: 'Tenda Cristal',
     description: 'Perfeita para eventos a noite.',
     image: tenda5,
-    sizes: ['10x20m', '15x30m', '20x40m', '25x50m'],
+    sizes: ['5x5m', '10x10m', '10x15m', '10x20m'],
     features: [
       'Estrutura modular',
       'Vão livre sem colunas internas',
@@ -55,46 +51,6 @@ const products = [
       'Armazenamento',
       'Centros logísticos',
       'Shows e espetáculos',
-    ],
-  },
-  {
-    id: 4,
-    name: 'Tenda Tensionada',
-    description: 'Moderna e elegante, ideal para eventos sofisticados.',
-    image: tenda4,
-    sizes: ['Personalizado'],
-    features: [
-      'Design contemporâneo',
-      'Formas orgânicas',
-      'Lona especial tensionada',
-      'Resistente às intempéries',
-      'Personalização total',
-    ],
-    applications: [
-      'Casamentos',
-      'Eventos corporativos',
-      'Áreas de piscina',
-      'Hotéis e resorts',
-    ],
-  },
-  {
-    id: 5,
-    name: 'Tenda Duas Águas',
-    description: 'Estrutura tradicional com excelente aproveitamento de espaço.',
-    image: tenda5,
-    sizes: ['5x5m', '6x6m', '8x8m', '10x10m'],
-    features: [
-      'Design clássico',
-      'Ótimo escoamento de água',
-      'Estrutura reforçada',
-      'Versatilidade de uso',
-      'Fácil instalação',
-    ],
-    applications: [
-      'Eventos ao ar livre',
-      'Feiras comerciais',
-      'Áreas de lazer',
-      'Eventos esportivos',
     ],
   },
   {

@@ -45,7 +45,7 @@ export default function About() {
               Nossa História
             </h1>
             <p className="text-xl text-gray-200">
-              Há mais de 10 anos sendo referência no mercado de tendas,
+              Há 10 anos sendo referência no mercado de tendas,
               oferecendo soluções inovadoras e de qualidade para nossos clientes.
             </p>
           </div>

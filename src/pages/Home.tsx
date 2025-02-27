@@ -87,7 +87,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[80vh] bg-gray-900 text-white">
+      <section className="relative h-[93vh] bg-gray-900 text-white">
         <div className="absolute inset-0">
           <img 
             src={tenda8} 
